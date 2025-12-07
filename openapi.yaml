@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Music Theory API
+  version: 1.0.0
+
+paths:
+  /scales/{root}/{type}:
+    get:
+      summary: Get notes in a scale
+      parameters:
+        - in: path
+          name: root
+          schema:
+            type: string
+        - in: path
+          name: type
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Notes in the scale
+          content:
+            application/json:
+              schema:
+                type: object
