@@ -1,0 +1,22 @@
+ Future possibilities without a DB
+
+If desired later:
+
+Harmonization (build chords from scales)
+
+Progression suggestions based on key
+
+MIDI pattern generation
+
+Scale degree conversions (1 → tonic, 4 → subdominant)
+
+All algorithmic — still no database required.
+
+
+
+
+so now i build chords by getting index fromall the NOTES array. problem is if example ask for Cdom7 it gives me C E F A# when it should give me Bb not A# 
+can i say something like if dom7 is the type, then  NOTES[noteIndex].name = NOTES[noteIndex].enharmonic
+
+better yet, dominant 7's are always = lowering the 7th. this would mean that every chord type where the noteIndex === 10 we should choose the enharmonic name of the note instead of 
+the default name of the note
