@@ -20,3 +20,10 @@ can i say something like if dom7 is the type, then  NOTES[noteIndex].name = NOTE
 
 better yet, dominant 7's are always = lowering the 7th. this would mean that every chord type where the noteIndex === 10 we should choose the enharmonic name of the note instead of 
 the default name of the note
+
+
+js synth library web audio api
+
+consider not allowing scales that are different when descending
+
+chromatic scale a little weird in how it is displayed, fix later

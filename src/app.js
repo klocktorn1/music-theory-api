@@ -5,6 +5,8 @@ const app = express();
 
 const notesRouter = require('./routes/notes');
 const chordsRouter = require('./routes/chords');
+const scalesRouter = require('./routes/scales');
+const intervalsRouter = require('./routes/intervals');
 
 
 
@@ -13,6 +15,8 @@ app.use(express.json());
 
 app.use('/notes', notesRouter);
 app.use('/chords', chordsRouter);
+app.use('/scales', scalesRouter);
+app.use('/intervals', intervalsRouter);
 
 
 app.use((req, res, next) => {
