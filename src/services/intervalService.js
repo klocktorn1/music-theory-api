@@ -9,14 +9,16 @@ function getKeyByValue(obj, value) {
 }
 
 
+const LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
 
+const getFirstLetter = note => note[0];
 
 
 const generateInterval = (from, to) => {
     const fromIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(from));
     const toIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(to));
     if (fromIndex === -1 || toIndex === -1) throw new Error(`One or both of the notes entered is invalid: ${from} or ${to}`);
-    const intervalIndex = toIndex - fromIndex;
+    const intervalIndex = ((toIndex - fromIndex) + 12) % 12;
     const interval = INTERVALS[intervalIndex];
     return interval;
 };
@@ -46,11 +48,11 @@ const generateNote = (root, interval) => {
                 : notesFromInterval.find(note => note.length === 1))
 
     console.log(noteFromInterval);
-    
+
 
     return noteFromInterval
 }
 
-generateNote("Cb", "M3")
+generateNote("C", "M3")
 
 module.exports = { generateInterval, generateNote }
