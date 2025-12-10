@@ -27,3 +27,19 @@ js synth library web audio api
 consider not allowing scales that are different when descending
 
 chromatic scale a little weird in how it is displayed, fix later
+
+fix P8/P1 in intervals data, need a better fix
+
+
+finding in array cheatsheet:
+Goal	                                    Best Method	                        Returns
+Find first match	                        find	                            the element
+
+Find all matches	                         filter	                        array of elements
+
+Check if exists	                            includes	                         boolean
+
+Get index of first match	                findIndex                          	number
+
+
+GET /chords/C/major?inversion=1&octave=4 - url example if i want to add some stuff like this

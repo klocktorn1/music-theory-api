@@ -1,18 +1,6 @@
 const { NOTES } = require("../data/notes.js");
 const { INTERVALS } = require("../data/intervals.js");
-
-function getKeyByValue(obj, value) {
-    for (let key in obj) {
-        if (obj[key] === value) return key;
-    }
-    return undefined;
-}
-
-
-const LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
-
-const getFirstLetter = note => note[0];
-
+const { generateScale } = require("./scaleService.js");
 
 const generateInterval = (from, to) => {
     const fromIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(from));
@@ -25,34 +13,36 @@ const generateInterval = (from, to) => {
 
 
 const generateNote = (root, interval) => {
-    const rootIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(root));
-    const intervalIndex = getKeyByValue(INTERVALS, interval)
-    if (!intervalIndex) throw new Error(`Interval ${interval} does not exist`)
+    const rootIndex = NOTES.findIndex(enharmonicNote => enharmonicNote.names.includes(root));
+    const intervalSemitones = INTERVALS[interval]
+    if (!intervalSemitones) throw new Error(`Interval ${interval} does not exist`)
 
-    const noteFromIntervalIndex = (rootIndex + parseInt(intervalIndex)) % NOTES.length
+    const { notes } = generateScale(root, "chromatic")
+    const chromaticScale = notes
 
+    const indexFromSemitones = (rootIndex + parseInt(intervalSemitones)) % NOTES.length
 
+    const enharmonicChoices = NOTES[indexFromSemitones].names
 
-    const notesFromInterval = NOTES[noteFromIntervalIndex].names
+    const [chosenEnharmonic] = enharmonicChoices.filter(note => chromaticScale.includes(note))
 
-    const includesFlat = root.includes("b")
-    const includesSharp = root.includes("#")
-
-
-
-    const noteFromInterval =
-        (includesFlat
-            ? notesFromInterval.find(note => note[1] === "b")
-            : includesSharp
-                ? notesFromInterval.find(note => note[1] === "#")
-                : notesFromInterval.find(note => note.length === 1))
-
-    console.log(noteFromInterval);
-
-
-    return noteFromInterval
+    return chosenEnharmonic
 }
 
-generateNote("C", "M3")
+generateNote("F#", "P4")
 
 module.exports = { generateInterval, generateNote }
+
+
+// need to figure out how it chooses the correct enharmonics. now it says: if root includes flat, choose the enharmonic where the second letter is a b
+// maybe if i get the ionian scale for the root note that is put in i can say: if one element in enharmonicChoices is inside the chromaticScale, choose that note.
+//  take an array and look inside another array. if one element from the first array matches one element in the second array, take that
+
+// const includesFlat = root.includes("b")
+// const includesSharp = root.includes("#")
+// const chosenEnharmonic =
+//     (includesFlat
+//         ? enharmonicChoices.find(note => note[1] === "b")
+//         : includesSharp
+//             ? enharmonicChoices.find(note => note[1] === "#")
+//             : enharmonicChoices.find(note => note.length === 1))
