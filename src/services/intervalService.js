@@ -2,12 +2,21 @@ const { NOTES } = require("../data/notes.js");
 const { INTERVALS } = require("../data/intervals.js");
 const { generateScale } = require("./scaleService.js");
 
+
+const getIntervalBySemitones = (semitones) => {
+    const interval = Object.keys(INTERVALS).find(key => INTERVALS[key] === semitones);
+    return interval;
+}
+
 const generateInterval = (from, to) => {
     const fromIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(from));
     const toIndex = NOTES.findIndex(enharmonicNotes => enharmonicNotes.names.includes(to));
     if (fromIndex === -1 || toIndex === -1) throw new Error(`One or both of the notes entered is invalid: ${from} or ${to}`);
     const intervalIndex = ((toIndex - fromIndex) + 12) % 12;
-    const interval = INTERVALS[intervalIndex];
+    const interval = getIntervalBySemitones(intervalIndex);
+
+    console.log(interval);
+    
     return interval;
 };
 
@@ -28,6 +37,8 @@ const generateNote = (root, interval) => {
 
     return chosenEnharmonic
 }
+
+generateInterval("C", "G")
 
 generateNote("F#", "P4")
 

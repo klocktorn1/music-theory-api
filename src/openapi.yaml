@@ -1,0 +1,456 @@
+openapi: 3.0.3
+info:
+  title: Music Theory API
+  version: 1.0.0
+  description: API to get music theory information like chords, scales, notes, and intervals.
+
+servers:
+  - url: http://localhost:5000/api
+    description: Local development server
+
+paths:
+  /chords/{root}/{type}:
+    get:
+      summary: Get a chord
+      description: Returns the notes of a chord based on the root note and chord type.
+      parameters:
+        - name: root
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - C
+              - Csharp
+              - Cx
+              - Cb
+              - Cbb
+              - D
+              - Dsharp
+              - Dx
+              - Db
+              - Dbb
+              - E
+              - Esharp
+              - Ex
+              - Eb
+              - Ebb
+              - F
+              - Fsharp
+              - Fx
+              - Fb
+              - Fbb
+              - G
+              - Gsharp
+              - Gx
+              - Gb
+              - Gbb
+              - A
+              - Asharp
+              - Ax
+              - Ab
+              - Abb
+              - B
+              - Bsharp
+              - Bx
+              - Bb
+              - Bbb
+          description: Root note (URL-safe, e.g., C, Csharp, D, Bflat)
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - major
+              - minor
+              - diminished
+              - augmented
+              - sus2
+              - sus4
+              - maj7
+              - dom7
+              - minor7
+              - minor7flat5
+              - dim7
+              - aug7
+              - maj7sharp5
+              - dom9
+              - maj9
+              - minor9
+              - dom11
+              - maj11
+              - minor11
+              - dom13
+              - maj13
+              - minor13
+              - dom7flat9
+              - dom7sharp9
+              - dom7flat5
+              - dom7sharp5
+              - dom7sharp11
+              - dom7flat13
+              - maj7sharp11
+              - minorMaj7
+              - minor6
+              - major6
+              - sus13
+              - dim9
+              - wholeTone7
+          description: Chord type (e.g., major, minor, dom7flat9)
+      responses:
+        '200':
+          description: Chord retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chord:
+                    type: string
+                    example: "Cm"
+                  root:
+                    type: string
+                    example: "C"
+                  formula:
+                    type: array
+                    items:
+                      type: integer
+                    example: [0, 3, 7]
+                  degrees:
+                    type: array
+                    items:
+                      type: string
+                    example: ["1", "b3", "5"]
+                  notes:
+                    type: array
+                    items:
+                      type: string
+                    example: ["C", "Eb", "G"]
+        '400':
+          description: Invalid parameters
+
+  /interval/{from}/{to}:
+    get:
+      summary: Get interval between two notes
+      description: Returns the interval between two notes.
+      parameters:
+        - name: from
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - C
+              - Csharp
+              - Cx
+              - Cb
+              - Cbb
+              - D
+              - Dsharp
+              - Dx
+              - Db
+              - Dbb
+              - E
+              - Esharp
+              - Ex
+              - Eb
+              - Ebb
+              - F
+              - Fsharp
+              - Fx
+              - Fb
+              - Fbb
+              - G
+              - Gsharp
+              - Gx
+              - Gb
+              - Gbb
+              - A
+              - Asharp
+              - Ax
+              - Ab
+              - Abb
+              - B
+              - Bsharp
+              - Bx
+              - Bb
+              - Bbb
+
+          description: Starting note
+        - name: to
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - C
+              - Csharp
+              - Cx
+              - Cb
+              - Cbb
+              - D
+              - Dsharp
+              - Dx
+              - Db
+              - Dbb
+              - E
+              - Esharp
+              - Ex
+              - Eb
+              - Ebb
+              - F
+              - Fsharp
+              - Fx
+              - Fb
+              - Fbb
+              - G
+              - Gsharp
+              - Gx
+              - Gb
+              - Gbb
+              - A
+              - Asharp
+              - Ax
+              - Ab
+              - Abb
+              - B
+              - Bsharp
+              - Bx
+              - Bb
+              - Bbb
+
+          description: Ending note
+          
+      responses:
+        '200':
+          description: Interval retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  interval:
+                    type: string
+                    example: "P5"
+        '400':
+          description: Invalid notes
+
+  /interval/build/{root}/{interval}:
+    get:
+      summary: Get a note by interval
+      description: Returns the note obtained by applying an interval to a root note.
+      parameters:
+        - name: root
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - C
+              - Csharp
+              - Cx
+              - Cb
+              - Cbb
+              - D
+              - Dsharp
+              - Dx
+              - Db
+              - Dbb
+              - E
+              - Esharp
+              - Ex
+              - Eb
+              - Ebb
+              - F
+              - Fsharp
+              - Fx
+              - Fb
+              - Fbb
+              - G
+              - Gsharp
+              - Gx
+              - Gb
+              - Gbb
+              - A
+              - Asharp
+              - Ax
+              - Ab
+              - Abb
+              - B
+              - Bsharp
+              - Bx
+              - Bb
+              - Bbb
+
+        - name: interval
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - P1
+              - m2
+              - M2
+              - m3
+              - M3
+              - P4
+              - b5
+              - P5
+              - m6
+              - M6
+              - m7
+              - M7
+              - P8
+          description: Interval to apply (e.g., M3, P5)
+      responses:
+        '200':
+          description: Note retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  note:
+                    type: string
+                    example: "G"
+        '400':
+          description: Invalid parameters
+
+  /notes:
+    get:
+      summary: Get all notes
+      description: Returns a list of all musical notes, including all enharmonic equivalents.
+      responses:
+        '200':
+          description: Notes retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  NOTES:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        names:
+                          type: array
+                          items:
+                            type: string
+                            example: ["C", "Dbb", "B#"]
+
+  /scales/{root}/{type}:
+    get:
+      summary: Get a scale
+      description: Returns the notes, formula, and degrees of a scale based on the root note and scale type.
+      parameters:
+        - name: root
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+            - C
+            - Csharp
+            - Cx
+            - Cb
+            - Cbb
+            - D
+            - Dsharp
+            - Dx
+            - Db
+            - Dbb
+            - E
+            - Esharp
+            - Ex
+            - Eb
+            - Ebb
+            - F
+            - Fsharp
+            - Fx
+            - Fb
+            - Fbb
+            - G
+            - Gsharp
+            - Gx
+            - Gb
+            - Gbb
+            - A
+            - Asharp
+            - Ax
+            - Ab
+            - Abb
+            - B
+            - Bsharp
+            - Bx
+            - Bb
+            - Bbb
+
+
+          description: Root note (e.g., C, D#, F)
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ionian
+              - dorian
+              - phrygian
+              - lydian
+              - mixolydian
+              - aeolian
+              - locrian
+              - harmonicMinor
+              - locrianNat6
+              - ionianAug
+              - dorianSharp4
+              - phrygianDominant
+              - lydianSharp2
+              - ultralocrian
+              - melodicMinor
+              - dorianFlat2
+              - lydianAug
+              - lydianDominant
+              - mixolydianFlat6
+              - aeolianFlat5
+              - altered
+              - majorPentatonic
+              - minorPentatonic
+              - wholeTone
+              - chromatic
+          description: Scale type (e.g., major, minor, dorian)
+      responses:
+        '200':
+          description: Scale retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scale:
+                    type: object
+                    properties:
+                      root:
+                        type: string
+                        example: C
+                      scale:
+                        type: string
+                        example: C ionian
+                      formula:
+                        type: array
+                        items:
+                          type: integer
+                        example: [0, 2, 4, 5, 7, 9, 11]
+                      degrees:
+                        type: array
+                        items:
+                          type: string
+                        example: ["1", "2", "3", "4", "5", "6", "7"]
+                      notes:
+                        type: array
+                        items:
+                          type: string
+                        example: ["C", "D", "E", "F", "G", "A", "B"]
+

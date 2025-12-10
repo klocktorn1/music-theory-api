@@ -8,11 +8,11 @@ sus4: [0, 5, 7],
 maj7: [0, 4, 7, 11],
 dom7: [0, 4, 7, 10],
 minor7: [0, 3, 7, 10],
-minor7flat5: [0, 3, 6, 10],    // half-diminished
-dim7: [0, 3, 6, 9],         // fully diminished
-aug7: [0, 4, 8, 10],        // augmented dominant
+minor7flat5: [0, 3, 6, 10],    
+dim7: [0, 3, 6, 9],         
+aug7: [0, 4, 8, 10],        
 maj7sharp5: [0, 4, 8, 11],
-dom9: [0, 4, 7, 10, 14],        // 9th is 14 semitones aflatove root
+dom9: [0, 4, 7, 10, 14],        
 maj9: [0, 4, 7, 11, 14],
 minor9: [0, 3, 7, 10, 14],
 dom11: [0, 4, 7, 10, 14, 17],
@@ -25,17 +25,17 @@ dom7flat9: [0, 4, 7, 10, 13],
 dom7sharp9: [0, 4, 7, 10, 15],
 dom7flat5: [0, 4, 6, 10],
 dom7sharp5: [0, 4, 8, 10],
-dom7sharp11: [0, 4, 7, 10, 18],   // #11 = augmented 4th = 18 semitones
+dom7sharp11: [0, 4, 7, 10, 18],   
 dom7flat13: [0, 4, 7, 10, 20],
-maj7sharp11: [0, 4, 7, 11, 18],     // Lydian sound
-minorMaj7: [0, 3, 7, 11],       // minor with major 7th
+maj7sharp11: [0, 4, 7, 11, 18],     
+minorMaj7: [0, 3, 7, 11],       
 minor6: [0, 3, 7, 9],
 major6: [0, 4, 7, 9],
-sus13: [0, 5, 7, 10, 21],       // sus4 + dominant 13
-dim7: [0, 3, 6, 9],             // fully diminished
+sus13: [0, 5, 7, 10, 21],       
+dim7: [0, 3, 6, 9],            
 dim9: [0, 3, 6, 9, 14],
 aug7: [0, 4, 8, 10],
-wholeTone7: [0, 4, 8, 10],      // identical to augmented dominant
+wholeTone7: [0, 4, 8, 10]
 };
 
 

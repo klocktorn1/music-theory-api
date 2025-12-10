@@ -32,7 +32,6 @@ const cleanChordTypes = (type) => {
 
 
 const generateChord = (root, type) => {
-    if (root.length === 3) throw new Error(`${root}${type} <---- no.`)
 
     // gets the chord formula (say minor7)
     const chordFormula = CHORDS[type];

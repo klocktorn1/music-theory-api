@@ -72,13 +72,12 @@ const generateScale = (root, type) => {
 
     const cleanedScale = cleanScale(type)
 
-    console.log(scaleNotes);
     
     const response = { root: root, scale: `${root} ${cleanedScale}`, formula: scaleFormula, degrees: degrees, notes: scaleNotes }
     return response;
 };
 
-generateScale("Bb", "chromatic")
+generateScale("C", "lydian")
 const test = () => {
     LETTERS2.map((letter) => {
         return console.log(generateScale(letter, "melodicMinor"))

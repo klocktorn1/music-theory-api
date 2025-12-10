@@ -43,3 +43,19 @@ Get index of first match	                findIndex                          	num
 
 
 GET /chords/C/major?inversion=1&octave=4 - url example if i want to add some stuff like this
+
+
+i need to be able to generate a chromatic scale with CORRECT theoretical enharmonic notes for each note available. The rules should be the following: the degrees are     
+    0: "1",
+    1: "b2",
+    2: "2",
+    3: "b3",
+    4: "3",
+    5: "4",
+    6: "b5",
+    7: "5",
+    8: "b6",
+    9: "6",
+    10: "b7",
+    11: "7",
+which would mean in C: C is 0 since D is 2 in C the b2 = Db since we are lowering the second degree. This would apply for every scale. So Cb for instance Cb Db Eb ... the b2 would have to be Dbb since we are lowering the second degree. in C# it would be C# D# E# ... the b2 would be D since we are lowering the second degree. i need every key to follow these rules.
