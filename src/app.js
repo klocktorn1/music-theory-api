@@ -21,10 +21,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 
-app.use('/api/notes', notesRouter);
-app.use('/api/chords', chordsRouter);
-app.use('/api/scales', scalesRouter);
-app.use('/api/intervals', intervalsRouter);
+app.use('/api/v1/notes', notesRouter);
+app.use('/api/v1/chords', chordsRouter);
+app.use('/api/v1/scales', scalesRouter);
+app.use('/api/v1/intervals', intervalsRouter);
 app.use((req, res, next) => {
     res.status(404).json({ error: 'Endpoint Not Found' });
 });
