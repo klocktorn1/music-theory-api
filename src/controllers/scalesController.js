@@ -7,7 +7,7 @@ const getScale = async (req, res) => {
     try {
 
         const scale = generateScale(root, type)
-        return res.json({ scale: scale });
+        return res.json(scale );
     } catch (err) {
         return res.status(500).json({ error: `getScale inside scalesController: ${err.message}` });
     }

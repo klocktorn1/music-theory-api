@@ -9,7 +9,7 @@ const getInterval = async (req, res) => {
     try {
 
         const interval = generateInterval(from, to)
-        return res.json({ interval });
+        return res.json(interval);
     } catch (err) {
         return res.status(500).json({ error: `getInterval inside intervalsController: ${err.message}` });
     }
