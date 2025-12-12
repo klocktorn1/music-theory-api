@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const path = require('path');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
@@ -20,7 +21,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.use(express.json());
-
+app.use(cors())
 app.use('/api/v1/notes', notesRouter);
 app.use('/api/v1/chords', chordsRouter);
 app.use('/api/v1/scales', scalesRouter);
