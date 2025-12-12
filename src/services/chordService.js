@@ -82,5 +82,13 @@ const generateChord = (root, type) => {
     return response;
 };
 
+const generateChords = (root, types) => {
+    const chords = types.map(type => generateChord(root, type));    
+    return chords;
+}
 
-module.exports = { generateChord };
+
+generateChords("C", ["major", "minor7", "dom7"]);
+
+
+module.exports = { generateChord, generateChords };

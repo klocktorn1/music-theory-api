@@ -1,4 +1,4 @@
-const { generateChord } = require("../services/chordService");
+const { generateChord, generateChords } = require("../services/chordService");
 
 
 const getChord = async (req, res) => {
@@ -13,5 +13,18 @@ const getChord = async (req, res) => {
     }
 }
 
+const getChords = (req, res) => {
 
-module.exports = { getChord }
+    const { root } = req.params
+    const { types } = req.query
+    try {
+
+        const chords = generateChords(root, types)
+        return res.json(chords);
+    } catch (err) {
+        return res.status(500).json({ error: `getChords inside chordsController: ${err.message}` });
+    }
+}
+
+
+module.exports = { getChord, getChords }
