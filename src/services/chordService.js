@@ -66,7 +66,11 @@ const generateChord = (root, type) => {
         // second itereration, i = 1 so 2 + 1 * 2 = 4 which would be G
         // third i = 2, 2 + 2 * 2 = 6 6 would be B
         //  fourth i = 3 so 2 + 3 * 2 = 8.  8 % 7 is 1 so 1 = D. lastly we would have E G B D
-        const expectedLetter = LETTERS[(firstLetterInRootIndex + i * 2) % 7];
+        const degreeStr = DEGREES[interval] || "";
+        const degreeNum = parseInt(degreeStr.replace(/[^0-9]/g, ""), 10);
+        const step = Number.isFinite(degreeNum) ? (degreeNum - 1) : (i * 2);
+        const expectedLetter = LETTERS[(firstLetterInRootIndex + step) % 7];
+
         // find inside enharmonicNotes ( the enharmonic notes in given pitchIndex ) a note where the first letter matches each expectedLetter
         // add it to chosen
         const chosen = enharmonicNotes.find(n => getFirstLetter(n) === expectedLetter);
@@ -83,7 +87,7 @@ const generateChord = (root, type) => {
 };
 
 const generateChords = (root, types) => {
-    const chords = types.map(type => generateChord(root, type));    
+    const chords = types.map(type => generateChord(root, type));
     return chords;
 }
 
