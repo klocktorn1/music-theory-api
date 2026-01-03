@@ -15,11 +15,10 @@ const getChord = async (req, res) => {
 
 const getChords = (req, res) => {
 
-    const { root } = req.params
-    const { types } = req.query
+    const { root, type } = req.query
     try {
 
-        const chords = generateChords(root, types)
+        const chords = generateChords(root, type)
         return res.json(chords);
     } catch (err) {
         return res.status(500).json({ error: `getChords inside chordsController: ${err.message}` });
