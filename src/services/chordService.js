@@ -87,11 +87,10 @@ const generateChord = (root, type) => {
 };
 
 const generateChords = (roots, types) => {
-    const chords = types.map(type => {
-        return roots.map(root => generateChord(root, type))
-    });
-    return chords;
-}
+    return roots.flatMap(root =>
+        types.map(type => generateChord(root, type))
+    );
+};
 
 
 console.log(generateChords(["C", "F", "G"], ["major", "minor"]));

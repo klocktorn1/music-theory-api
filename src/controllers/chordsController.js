@@ -19,7 +19,7 @@ const getChords = (req, res) => {
     try {
 
         const chords = generateChords(root, type)
-        return res.json(chords);
+        return res.json({chords});
     } catch (err) {
         return res.status(500).json({ error: `getChords inside chordsController: ${err.message}` });
     }
