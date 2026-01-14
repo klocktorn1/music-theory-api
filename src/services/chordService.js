@@ -86,14 +86,19 @@ const generateChord = (root, type) => {
     return response;
 };
 
-const generateChords = (roots, types) => {
+const generateChordsMultipleKeys = (roots, types) => {
     return roots.flatMap(root =>
         types.map(type => generateChord(root, type))
     );
 };
 
+const generateChordsOneKey = (root, types) => {
+    return types.map(type => generateChord(root, type))
 
-console.log(generateChords(["C", "F", "G"], ["major", "minor"]));
+};
 
 
-module.exports = { generateChord, generateChords };
+console.log(generateChordsOneKey("C", ["major", "minor"]));
+
+
+module.exports = { generateChord, generateChordsMultipleKeys, generateChordsOneKey };

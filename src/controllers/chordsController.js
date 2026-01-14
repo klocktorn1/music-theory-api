@@ -1,4 +1,4 @@
-const { generateChord, generateChords } = require("../services/chordService");
+const { generateChord, generateChordsMultipleKeys, generateChordsOneKey } = require("../services/chordService");
 
 
 const getChord = async (req, res) => {
@@ -13,17 +13,30 @@ const getChord = async (req, res) => {
     }
 }
 
-const getChords = (req, res) => {
+const getChordsMultipleKeys = (req, res) => {
 
     const { root, type } = req.query
     try {
 
-        const chords = generateChords(root, type)
+        const chords = generateChordsMultipleKeys(root, type)
         return res.json({chords});
     } catch (err) {
-        return res.status(500).json({ error: `getChords inside chordsController: ${err.message}` });
+        return res.status(500).json({ error: `getChordsMultipleKeys inside chordsController: ${err.message}` });
+    }
+}
+
+const getChordsOneKey = (req, res) => {
+
+    const { type } = req.query
+    const root = req.params.root
+    try {
+
+        const chords = generateChordsOneKey(root, type)
+        return res.json({chords});
+    } catch (err) {
+        return res.status(500).json({ error: `getChordsOneKey inside chordsController: ${err.message}` });
     }
 }
 
 
-module.exports = { getChord, getChords }
+module.exports = { getChord, getChordsMultipleKeys, getChordsOneKey }
